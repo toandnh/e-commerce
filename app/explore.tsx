@@ -13,10 +13,10 @@ export default async function Explore() {
 	return (
 		<div className='flex flex-col gap-4 overflow-y-auto'>
 			{tags.map((tag) => (
-				<>
+				<div key={tag.id}>
 					{/* @ts-expect-error Async Server Component */}
-					<Carousel key={tag.id} tag={tag.name} />
-				</>
+					<Carousel tag={tag.name} />
+				</div>
 			))}
 		</div>
 	)

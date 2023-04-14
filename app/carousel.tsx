@@ -39,5 +39,5 @@ export default async function Carousel({ tag }: { tag: string }) {
 
 	const items = await getItemsByIds(itemIdsWithTag)
 
-	return <EmblaCarousel key={tag} category={tag} items={items} />
+	return <EmblaCarousel category={tag} items={items} />
 }
