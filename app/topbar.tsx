@@ -56,7 +56,7 @@ export default function Topbar() {
 	if (!mounted) return null
 
 	return (
-		<div className='bg-neutral-100 dark:bg-neutral-900 flex flex-col pb-4 sm:pb-6 2xl:pb-8'>
+		<div className='bg-neutral-100 dark:bg-neutral-900 flex flex-col pb-4 sm:pb-6 2xl:pb-8 sticky top-0 z-10'>
 			<div className='w-full flex flex-row py-4 sm:py-6 2xl:py-8'>
 				<Link href='/' className='flex basis-1/2 justify-start items-center'>
 					<h1

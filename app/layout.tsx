@@ -3,6 +3,7 @@ import './globals.css'
 import QueryWrapper from './queryWrapper'
 
 import Topbar from './topbar'
+import Footer from './footer'
 
 import { Providers } from './providers'
 
@@ -18,11 +19,14 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className='bg-neutral-100 dark:bg-neutral-900 h-screen w-screen min-w-[300px] flex flex-col px-4 sm:px-6 2xl:px-8 overflow-hidden'>
+			<body className='bg-neutral-100 dark:bg-neutral-900 min-w-[300px] flex flex-col overflow-y-auto'>
 				<QueryWrapper>
 					<Providers>
-						<Topbar />
-						{children}
+						<div className='flex flex-col p-4 sm:p-6 2xl:p-8'>
+							<Topbar />
+							{children}
+						</div>
+						<Footer />
 					</Providers>
 				</QueryWrapper>
 			</body>

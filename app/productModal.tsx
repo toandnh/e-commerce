@@ -33,7 +33,7 @@ export default function ProductModal({ item }: any) {
 					justifyContent: 'center',
 					alignItems: 'center',
 					'& .MuiModal-backdrop': {
-						backgroundColor: 'rgba(64, 64, 64, 0.2)'
+						backgroundColor: 'rgba(64, 64, 64, 0.7)'
 					}
 				}}
 				open={open}
