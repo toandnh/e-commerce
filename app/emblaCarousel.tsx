@@ -7,7 +7,7 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-import { CldImage } from 'next-cloudinary'
+import ProductModal from './productModal'
 
 export default function EmblaCarousel({
 	category,
@@ -31,43 +31,32 @@ export default function EmblaCarousel({
 		if (emblaApi) emblaApi.scrollNext()
 	}, [emblaApi])
 
-	const images: string[] = []
-	items.map((item) => {
-		images.push(item.image.replace('%20', ' ')) //prevent double encoding.
-	})
-
 	return (
-		<div className='relative'>
-			<div className='overflow-hidden' ref={emblaRef}>
-				<div className='flex'>
-					{images.map((image, index) => {
-						return (
-							<div className='flex-none pr-4' key={index}>
-								<CldImage
-									height='200'
-									width='200'
-									src={image}
-									alt='thumbnail'
-								/>
-							</div>
-						)
-					})}
+		<>
+			<div className='text-lg font-semibold pb-4'>{category}</div>
+			<div className='relative'>
+				<div className='flex flex-col gap-4 overflow-hidden' ref={emblaRef}>
+					<div className='flex'>
+						{items.map((item, index) => {
+							return <ProductModal key={index} item={item} />
+						})}
+					</div>
 				</div>
+
+				<button
+					className='absolute top-0 bottom-0 left-3 active:bg-transparent'
+					onClick={scrollPrev}
+				>
+					<ArrowBackIosOutlinedIcon sx={{ color: 'black' }} />
+				</button>
+
+				<button
+					className='absolute top-0 bottom-0 right-3 active:bg-transparent'
+					onClick={scrollNext}
+				>
+					<ArrowForwardIosOutlinedIcon sx={{ color: 'black' }} />
+				</button>
 			</div>
-
-			<button
-				className='absolute top-0 bottom-0 left-3 active:bg-transparent'
-				onClick={scrollPrev}
-			>
-				<ArrowBackIosOutlinedIcon sx={{ color: 'black' }} />
-			</button>
-
-			<button
-				className='absolute top-0 bottom-0 right-3 active:bg-transparent'
-				onClick={scrollNext}
-			>
-				<ArrowForwardIosOutlinedIcon sx={{ color: 'black' }} />
-			</button>
-		</div>
+		</>
 	)
 }

@@ -10,11 +10,11 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
 
-import { Satisfy } from 'next/font/google'
+import { Orbitron } from 'next/font/google'
 
 import clsx from 'clsx'
 
-const text = Satisfy({
+const text = Orbitron({
 	subsets: ['latin'],
 	weight: ['400']
 })
@@ -56,12 +56,12 @@ export default function Topbar() {
 	if (!mounted) return null
 
 	return (
-		<div className='bg-white dark:bg-neutral-900 flex flex-col pb-4 sm:pb-6 2xl:pb-8'>
+		<div className='bg-neutral-100 dark:bg-neutral-900 flex flex-col pb-4 sm:pb-6 2xl:pb-8'>
 			<div className='w-full flex flex-row py-4 sm:py-6 2xl:py-8'>
 				<Link href='/' className='flex basis-1/2 justify-start items-center'>
 					<h1
 						className={clsx(
-							'text-3xl text-black dark:text-white font-semibold pl-2',
+							'text-3xl text-neutral-900 dark:text-white font-semibold pl-2',
 							text.className
 						)}
 					>

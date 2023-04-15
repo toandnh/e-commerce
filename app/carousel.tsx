@@ -7,7 +7,7 @@ import EmblaCarousel from './emblaCarousel'
 async function getItemsByIds(ids: number[]) {
 	const items = await prisma.item.findMany({
 		where: { id: { in: ids } },
-		select: { title: true, image: true, description: true }
+		select: { title: true, image: true, description: true, price: true }
 	})
 	return items
 }
@@ -22,7 +22,7 @@ async function getItemIdWithTag(tag: string) {
 	}
 
 	const itemIdsWithTag = await prisma.itemsTags.findMany({
-		take: 5,
+		take: 10,
 		where: { tagId: foundTag.id },
 		select: { itemId: true }
 	})

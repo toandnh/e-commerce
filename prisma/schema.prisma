@@ -27,6 +27,7 @@ model Item {
   title       String
   image       String
   description String?
+  price       Float       @default(12.99)
   amount      Int
   cartId      Int?
   cart        Cart?       @relation(fields: [cartId], references: [id])

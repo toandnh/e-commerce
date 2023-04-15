@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className='bg-white dark:bg-neutral-900 h-screen w-screen min-w-[300px] flex flex-col px-4 sm:px-6 2xl:px-8 overflow-hidden'>
+			<body className='bg-neutral-100 dark:bg-neutral-900 h-screen w-screen min-w-[300px] flex flex-col px-4 sm:px-6 2xl:px-8 overflow-hidden'>
 				<QueryWrapper>
 					<Providers>
 						<Topbar />
