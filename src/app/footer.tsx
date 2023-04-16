@@ -11,7 +11,7 @@ export default function Footer() {
 	return (
 		<div
 			className={clsx(
-				'bg-neutral-300 dark:bg-neutral-800 p-16 border-t border-neutral-200 dark:border-neutral-700',
+				'bg-neutral-300 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-16 px-4 sm:px-6 2xl:px-8',
 				text.className
 			)}
 		>

@@ -10,6 +10,7 @@ import Product from './product'
 
 export default function ProductModal({ item }: any) {
 	const [open, setOpen] = useState(false)
+
 	const handleOpen = () => {
 		setOpen(true)
 	}

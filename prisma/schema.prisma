@@ -8,16 +8,17 @@ datasource db {
 }
 
 model Customer {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  cart  Cart?
+  id     Int     @id @default(autoincrement())
+  email  String? @unique
+  name   String?
+  orders Order[]
 }
 
-model Cart {
+model Order {
   id         Int      @id @default(autoincrement())
   customerId Int      @unique
   customer   Customer @relation(fields: [customerId], references: [id])
+  status     String
   items      Item[]
 }
 
@@ -29,8 +30,8 @@ model Item {
   description String?
   price       Float       @default(12.99)
   amount      Int
-  cartId      Int?
-  cart        Cart?       @relation(fields: [cartId], references: [id])
+  orderId     Int?
+  order       Order?      @relation(fields: [orderId], references: [id])
   tags        ItemsTags[]
 }
 
