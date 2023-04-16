@@ -8,15 +8,22 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { CldImage } from 'next-cloudinary'
 
 import { store } from '@/store'
-import { setCart } from '@/store/cartSlice'
+import { addToCart, emptyCart } from '@/store/cartSlice'
 
 const amount: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 export default function Product({ item }: any) {
 	const [selected, setSelected] = useState(amount[0])
 
+	const itemInfo: Item = {
+		title: item.title,
+		image: item.image,
+		price: item.price,
+		amount: selected
+	}
+
 	const handleSubmit = () => {
-		store.dispatch(setCart(item))
+		store.dispatch(addToCart(itemInfo))
 	}
 
 	return (

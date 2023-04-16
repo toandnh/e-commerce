@@ -1,9 +1,6 @@
-type ItemType = {
-	id: number
-	createdAt: Date
+type Item = {
 	title: string
 	image: string
-	description: string
+	price: string
 	amount: number
-	cartId: number | null
 }
