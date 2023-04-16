@@ -7,12 +7,17 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 import { CldImage } from 'next-cloudinary'
 
+import { store } from '@/store'
+import { setCart } from '@/store/cartSlice'
+
 const amount: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 export default function Product({ item }: any) {
 	const [selected, setSelected] = useState(amount[0])
 
-	const handleSubmit = () => {}
+	const handleSubmit = () => {
+		store.dispatch(setCart(item))
+	}
 
 	return (
 		<div className='bg-neutral-100 dark:bg-neutral-900 h-full min-h-[650px] w-full min-w-[850px] grid grid-cols-[1fr_1fr] rounded-lg p-2'>
