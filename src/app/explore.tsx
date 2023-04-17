@@ -1,6 +1,6 @@
 import prisma from '@/prisma/client'
 
-import Carousel from './carousel'
+import Carousel from '@/components/carousel/carousel'
 
 async function getTags() {
 	const tags = await prisma.tag.findMany()

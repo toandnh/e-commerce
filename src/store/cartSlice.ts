@@ -15,10 +15,12 @@ const cartSlice = createSlice({
 	reducers: {
 		addToCart: (state, action: PayloadAction<Item>) => {
 			let inCart = false
-			state.cart = state.cart.map((item) => {
-				if (item.title === action.payload.title) inCart = true
-				return item
-			})
+			for (let item of state.cart) {
+				if (item.title === action.payload.title) {
+					inCart = true
+					break
+				}
+			}
 
 			if (inCart) {
 				const updatePayload = {

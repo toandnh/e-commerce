@@ -14,7 +14,7 @@ import { Orbitron } from 'next/font/google'
 
 import clsx from 'clsx'
 
-import CartPopper from './cartPopper'
+import CartPopper from '@/components/cart/cartPopper'
 
 const text = Orbitron({
 	subsets: ['latin'],

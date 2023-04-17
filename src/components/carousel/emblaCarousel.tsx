@@ -7,7 +7,7 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-import ProductModal from './productModal'
+import ProductModal from '@/components/product/productModal'
 
 export default function EmblaCarousel({
 	category,

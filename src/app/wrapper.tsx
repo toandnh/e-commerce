@@ -6,14 +6,13 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import { persistor, store } from '@/store'
 
-import QueryWrapper from '../components/queryWrapper'
-
-import { ReactReduxProvider } from '@/components/reactReduxProvider'
-import { NextThemeProvider } from '@/components/nextThemeProvider'
+import ReactQueryProvider from '@/components/provider/reactQueryProvider'
+import ReactReduxProvider from '@/components/provider/reactReduxProvider'
+import NextThemeProvider from '@/components/provider/nextThemeProvider'
 
 export default function Wrapper({ content }: { content: React.ReactNode }) {
 	return (
-		<QueryWrapper>
+		<ReactQueryProvider>
 			<NextThemeProvider>
 				<ReactReduxProvider>
 					<Provider store={store}>
@@ -23,6 +22,6 @@ export default function Wrapper({ content }: { content: React.ReactNode }) {
 					</Provider>
 				</ReactReduxProvider>
 			</NextThemeProvider>
-		</QueryWrapper>
+		</ReactQueryProvider>
 	)
 }
