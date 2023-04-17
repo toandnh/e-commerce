@@ -16,7 +16,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	const content = (
-		<div className='flex flex-row'>
+		<div className='flex'>
 			<div>
 				<div className='flex flex-col p-4 sm:p-6 2xl:p-8'>
 					<Topbar />

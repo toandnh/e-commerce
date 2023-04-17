@@ -6,7 +6,6 @@ import Link from 'next/link'
 
 import { useTheme } from 'next-themes'
 
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
@@ -60,7 +59,7 @@ export default function Topbar() {
 
 	return (
 		<div className='bg-neutral-100 dark:bg-neutral-900 w-full flex flex-col pb-4 sm:pb-6 2xl:pb-8 sticky top-0 z-10'>
-			<div className='w-full flex flex-row py-3 sm:py-4 2xl:py-5'>
+			<div className='w-full flex py-3 sm:py-4 2xl:py-5'>
 				<Link href='/' className='flex basis-1/2 justify-start items-center'>
 					<h1
 						className={clsx(
@@ -71,7 +70,7 @@ export default function Topbar() {
 						AECS
 					</h1>
 				</Link>
-				<div className='flex flex-row gap-2 sm:gap-3 2xl:gap-4 basis-1/2 justify-end items-center'>
+				<div className='flex gap-2 sm:gap-3 2xl:gap-4 basis-1/2 justify-end items-center'>
 					<CartPopper theme={theme} />
 					<button onClick={toggleTheme}>
 						{theme === 'dark' ? (
@@ -89,16 +88,16 @@ export default function Topbar() {
 				</div>
 			</div>
 
-			<form className='flex flex-row gap-0 sm:gap-2 2xl:gap-4 py-3 sm:py-4 2xl:py-5'>
+			<form className='flex gap-0 sm:gap-2 2xl:gap-4 py-3 sm:py-4 2xl:py-5'>
 				<input
-					className='flex-grow rounded-lg border-2 sm:border-3 2xl:border-4 border-gunmetal-gray p-2 focus:outline-none focus:border-amber-500'
+					className='flex-grow rounded-md border-2 sm:border-3 2xl:border-4 border-gunmetal-gray p-2 focus:outline-none focus:border-amber-500'
 					type='text'
 					value={searchQuery}
 					onChange={handleSearch}
 					placeholder='Search...'
 				/>
 				<input
-					className='bg-teal-500 rounded-lg border-2 sm:border-3 2xl:border-4 border-teal-500 p-2 text-white disabled:opacity-50 enabled:hover:border-teal-700 enabled:hover:bg-teal-700 cursor-pointer'
+					className='bg-teal-500 rounded-md border-2 sm:border-3 2xl:border-4 border-teal-500 p-2 text-white disabled:opacity-50 enabled:hover:border-teal-700 enabled:hover:bg-teal-700 cursor-pointer'
 					type='submit'
 					disabled={searchQuery === ''}
 					value='Search'

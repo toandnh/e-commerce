@@ -1,15 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useSelector } from 'react-redux'
+import type { TypedUseSelectorHook } from 'react-redux'
 
 import { Modal } from '@mui/material'
 
 import { CldImage } from 'next-cloudinary'
 
+import { RootState } from '@/store'
+
 import Product from './product'
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function ProductModal({ item }: any) {
 	const [open, setOpen] = useState(false)
+
+	const cartItems = useAppSelector((state) => state.cart)
+
+	useEffect(() => {
+		setTimeout(() => {
+			handleClose()
+		}, 1000)
+	}, [cartItems])
 
 	const handleOpen = () => {
 		setOpen(true)

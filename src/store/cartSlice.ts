@@ -14,29 +14,65 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addToCart: (state, action: PayloadAction<Item>) => {
-			state.cart = [...state.cart, action.payload]
+			let inCart = false
+			state.cart = state.cart.map((item) => {
+				if (item.title === action.payload.title) inCart = true
+				return item
+			})
+
+			if (inCart) {
+				const updatePayload = {
+					title: action.payload.title,
+					sign: '+',
+					amount: action.payload.amount
+				}
+				const updateAction: PayloadAction<{
+					title: string
+					sign: string
+					amount: number
+				}> = {
+					payload: updatePayload,
+					type: 'string'
+				}
+				cartSlice.caseReducers.updateAmount(state, updateAction)
+			} else {
+				state.cart = [...state.cart, action.payload]
+			}
 		},
 		removeItemFromCart: (state, action: PayloadAction<string>) => {
-			state.cart = state.cart.filter((item) => item.title === action.payload)
+			state.cart = state.cart.filter((item) => item.title !== action.payload)
 		},
-		removeAmountFromCart: (
+		updateAmount: (
 			state,
-			action: PayloadAction<{ title: string; amount: number }>
+			action: PayloadAction<{ title: string; sign: string; amount: number }>
 		) => {
+			let clear = false
 			state.cart = state.cart.map((item) => {
 				if (item.title !== action.payload.title) return item
 
 				//check invalid amount.
-				if (item.amount - action.payload.amount <= 0) removeItemFromCart
+				if (item.amount <= 1 && action.payload.sign === '-') clear = true
+
+				const updatedAmount =
+					action.payload.sign === '-'
+						? item.amount - action.payload.amount
+						: item.amount + action.payload.amount
 
 				const updatedItem = {
 					title: item.title,
 					image: item.image,
 					price: item.price,
-					amount: item.amount - action.payload.amount
+					amount: updatedAmount
 				}
+
 				return updatedItem
 			})
+
+			const removeAction: PayloadAction<string> = {
+				payload: action.payload.title,
+				type: 'string'
+			}
+			if (clear) cartSlice.caseReducers.removeItemFromCart(state, removeAction)
 		},
 		emptyCart: (state) => {
 			state.cart = []
@@ -44,10 +80,6 @@ const cartSlice = createSlice({
 	}
 })
 
-export const {
-	addToCart,
-	removeItemFromCart,
-	removeAmountFromCart,
-	emptyCart
-} = cartSlice.actions
+export const { addToCart, removeItemFromCart, updateAmount, emptyCart } =
+	cartSlice.actions
 export default cartSlice.reducer
