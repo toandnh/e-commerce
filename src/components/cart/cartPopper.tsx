@@ -5,6 +5,7 @@ import type { TypedUseSelectorHook } from 'react-redux'
 
 import { Popover } from '@headlessui/react'
 
+import Badge from '@mui/material/Badge'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 
 import { RootState } from '@/store'
@@ -48,10 +49,16 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 				{({ open }) => (
 					<>
 						<Popover.Button>
-							<ShoppingBagOutlinedIcon
-								fontSize='large'
-								sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
-							/>
+							<Badge
+								invisible={cartItems.length === 0}
+								badgeContent={cartItems.length}
+								color='warning'
+							>
+								<ShoppingBagOutlinedIcon
+									fontSize='large'
+									sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
+								/>
+							</Badge>
 						</Popover.Button>
 						<Popover.Panel className='absolute left-1/2 w-screen max-w-sm lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
 							<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
