@@ -7,7 +7,7 @@ import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutl
 
 import useEmblaCarousel from 'embla-carousel-react'
 
-import ProductModal from '@/components/product/productModal'
+import ProductPreview from '@/components/product/productPreview'
 
 export default function EmblaCarousel({
 	category,
@@ -38,7 +38,7 @@ export default function EmblaCarousel({
 				<div className='flex flex-col gap-4 overflow-hidden' ref={emblaRef}>
 					<div className='flex'>
 						{items.map((item, index) => {
-							return <ProductModal key={index} item={item} />
+							return <ProductPreview key={index} item={item} />
 						})}
 					</div>
 				</div>

@@ -4,21 +4,33 @@ import prisma from '@/prisma/client'
 
 import EmblaCarousel from './emblaCarousel'
 
-async function getItemsByIds(ids: number[]) {
+type ItemIds = {
+	itemId: number
+}
+
+async function getItemsByIds(ids: number[]): Promise<Item[]> {
 	const items = await prisma.item.findMany({
 		where: { id: { in: ids } },
-		select: { title: true, image: true, description: true, price: true }
+		select: {
+			id: true,
+			title: true,
+			image: true,
+			description: true,
+			price: true
+		}
 	})
 	return items
 }
 
-async function getItemIdWithTag(tag: string) {
+async function getItemIdsWithTag(
+	tag: string
+): Promise<ItemIds[] | NextResponse> {
 	const foundTag = await prisma.tag.findUnique({
 		where: { name: tag },
 		select: { id: true, name: false }
 	})
 	if (!foundTag) {
-		return NextResponse.json({ message: `Tag '${name}' not found` })
+		return NextResponse.json({ message: `Tag '${tag}' not found` })
 	}
 
 	const itemIdsWithTag = await prisma.itemsTags.findMany({
@@ -30,7 +42,7 @@ async function getItemIdWithTag(tag: string) {
 }
 
 export default async function Carousel({ tag }: { tag: string }) {
-	const res = await getItemIdWithTag(tag)
+	const res = await getItemIdsWithTag(tag)
 
 	const itemIdsWithTag: number[] = []
 	if (res instanceof Array) {

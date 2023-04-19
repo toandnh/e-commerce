@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 import { configureStore } from '@reduxjs/toolkit'
 
 import { persistReducer, persistStore } from 'redux-persist'

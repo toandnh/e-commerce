@@ -11,20 +11,23 @@ export const metadata = {
 }
 
 export default function RootLayout({
-	children
+	children,
+	modal
 }: {
 	children: React.ReactNode
+	modal: React.ReactNode
 }) {
 	const content = (
-		<div className='flex'>
-			<div>
+		<>
+			<div className='flex flex-col'>
 				<div className='flex flex-col p-4 sm:p-6 2xl:p-8'>
 					<Topbar />
 					{children}
 				</div>
 				<Footer />
 			</div>
-		</div>
+			{modal}
+		</>
 	)
 
 	return (

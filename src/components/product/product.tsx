@@ -2,26 +2,28 @@
 
 import { useState } from 'react'
 
+import Image from 'next/image'
+
 import { Listbox } from '@headlessui/react'
 import {
 	CheckIcon as HuiCheckIcon,
 	ChevronUpDownIcon
 } from '@heroicons/react/20/solid'
 
-import { CldImage } from 'next-cloudinary'
-
 import { store } from '@/store'
 import { addToCart } from '@/store/cartSlice'
+
+import { cloudinaryLoader } from '../cloudinaryLoader'
 
 import Alert from './alert'
 
 const amount: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-export default function Product({ item }: any) {
+export default function Product({ item }: { item: Item }) {
 	const [selected, setSelected] = useState(amount[0])
 	const [added, setAdded] = useState(false)
 
-	const itemInfo: Item = {
+	const itemInfo: ItemCart = {
 		title: item.title,
 		image: item.image,
 		price: item.price,
@@ -34,15 +36,16 @@ export default function Product({ item }: any) {
 	}
 
 	return (
-		<div className='h-full w-full relative flex flex-col'>
+		<div className='relative flex flex-col'>
 			{added && <Alert title={item.title} />}
-			<div className='bg-neutral-100 dark:bg-neutral-900 min-h-[650px] min-w-[850px] grid grid-cols-[1fr_1fr] rounded-lg p-2'>
-				<div className='h-full w-full flex items-center'>
-					<CldImage
-						height='400'
-						width='400'
-						src={item.image.replace('%20', ' ')}
+			<div className='bg-neutral-100 dark:bg-neutral-900 min-h-[650px] max-h-[70vh] min-w-[850px] aspect-[4/3] grid grid-cols-[1fr_1fr] rounded-lg p-2'>
+				<div className='flex items-center'>
+					<Image
+						src={item.image}
 						alt={item.title}
+						height={400}
+						width={400}
+						loader={cloudinaryLoader}
 					/>
 				</div>
 				<div className='flex flex-col gap-4 py-4 pr-4 overflow-hidden'>

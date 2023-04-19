@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 type Cart = {
-	cart: Item[]
+	cart: ItemCart[]
 }
 
 const initialState: Cart = {
@@ -13,7 +13,7 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		addToCart: (state, action: PayloadAction<Item>) => {
+		addToCart: (state, action: PayloadAction<ItemCart>) => {
 			let inCart = false
 			for (let item of state.cart) {
 				if (item.title === action.payload.title) {

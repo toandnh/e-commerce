@@ -1,17 +1,19 @@
+import Image from 'next/image'
+
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
 
-import { CldImage } from 'next-cloudinary'
-
 import { store } from '@/store'
 import { updateAmount, removeItemFromCart } from '@/store/cartSlice'
+
+import { cloudinaryLoader } from '../cloudinaryLoader'
 
 export default function CartItem({
 	item,
 	theme
 }: {
-	item: Item
+	item: ItemCart
 	theme: string | undefined
 }) {
 	const handleAddItem = () => {
@@ -30,11 +32,12 @@ export default function CartItem({
 			className='flex items-center gap-4 p-2 border-b border-neutral-200 dark:border-neutral-600'
 		>
 			<div className='flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12'>
-				<CldImage
-					height='200'
-					width='200'
-					src={item.image.replace('%20', ' ')} //prevent double encoding.
+				<Image
+					src={item.image}
 					alt={item.title}
+					height={400}
+					width={400}
+					loader={cloudinaryLoader}
 				/>
 			</div>
 			<div className='w-full flex flex-col gap-4 ml-4'>
