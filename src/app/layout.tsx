@@ -32,7 +32,7 @@ export default function RootLayout({
 
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className='bg-neutral-100 dark:bg-neutral-900 min-w-[300px] flex flex-col overflow-y-auto'>
+			<body className='bg-neutral-100 dark:bg-neutral-900 flex flex-col overflow-y-auto'>
 				<Wrapper content={content} />
 			</body>
 		</html>

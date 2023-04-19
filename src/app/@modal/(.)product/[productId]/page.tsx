@@ -7,7 +7,7 @@ import useSWR from 'swr'
 import Modal from '@/components/modal'
 import Product from '@/components/product/product'
 
-export default function ProductPage() {
+export default function ProductModal() {
 	const pathname = usePathname()
 	const productTitle = pathname.slice(pathname.lastIndexOf('/') + 1)
 

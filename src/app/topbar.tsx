@@ -90,7 +90,7 @@ export default function Topbar() {
 
 			<form className='flex gap-0 sm:gap-2 2xl:gap-4 py-3 sm:py-4 2xl:py-5'>
 				<input
-					className='flex-grow rounded-md border-2 sm:border-3 2xl:border-4 border-gunmetal-gray p-2 focus:outline-none focus:border-amber-500'
+					className='min-w-0 flex-grow rounded-md border-2 sm:border-3 2xl:border-4 border-gunmetal-gray p-2 focus:outline-none focus:border-amber-500'
 					type='text'
 					value={searchQuery}
 					onChange={handleSearch}
