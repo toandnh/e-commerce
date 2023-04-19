@@ -7,7 +7,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
 import { store } from '@/store'
 import { updateAmount, removeItemFromCart } from '@/store/cartSlice'
 
-import { cloudinaryLoader } from '../cloudinaryLoader'
+import { cloudinaryLoader } from '../loader/cloudinaryLoader'
 
 export default function CartItem({
 	item,

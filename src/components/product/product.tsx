@@ -13,7 +13,7 @@ import {
 import { store } from '@/store'
 import { addToCart } from '@/store/cartSlice'
 
-import { cloudinaryLoader } from '../cloudinaryLoader'
+import { cloudinaryLoader } from '../loader/cloudinaryLoader'
 
 import Alert from './alert'
 

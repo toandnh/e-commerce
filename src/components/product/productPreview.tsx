@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { cloudinaryLoader } from '../cloudinaryLoader'
+import { cloudinaryLoader } from '../loader/cloudinaryLoader'
 
 export default function ProductPreview({ item }: { item: Item }) {
 	return (
