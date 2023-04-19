@@ -8,6 +8,8 @@ import { Popover } from '@headlessui/react'
 import Badge from '@mui/material/Badge'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+
 import { RootState } from '@/store'
 
 import CartItem from './cartItem'
@@ -16,6 +18,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function CartPopper({ theme }: { theme: string | undefined }) {
 	const cartItems = useAppSelector((state) => state.cart)
+
+	const isBreakpoint = useMediaQuery(768)
 
 	let cart: React.ReactNode
 
@@ -29,7 +33,12 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 				</p>
 				<div className='w-full relative grid gap-6 p-2 md:p-4 overflow-y-auto'>
 					{cartItems.map((item) => (
-						<CartItem key={item.title} item={item} theme={theme} />
+						<CartItem
+							key={item.title}
+							item={item}
+							theme={theme}
+							isBreakpoint={isBreakpoint}
+						/>
 					))}
 				</div>
 				<div className='w-full p-4 md:p-6'>
@@ -60,7 +69,7 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 								/>
 							</Badge>
 						</Popover.Button>
-						<Popover.Panel className='absolute left-1/2 w-screen max-w-sm lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
+						<Popover.Panel className='absolute left-1/2 w-screen max-w-xs lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
 							<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
 								{cart}
 							</div>
