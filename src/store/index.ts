@@ -1,11 +1,28 @@
-import { combineReducers } from 'redux'
-
 import { configureStore } from '@reduxjs/toolkit'
 
 import { persistReducer, persistStore } from 'redux-persist'
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
-import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
+
+const createNoopStorage = () => {
+	return {
+		getItem(_key: any): Promise<null> {
+			return Promise.resolve(null)
+		},
+		setItem(_key: any, value: any): Promise<null> {
+			return Promise.resolve(value)
+		},
+		removeItem(_key: any): Promise<void> {
+			return Promise.resolve()
+		}
+	}
+}
+
+const storage =
+	typeof window !== 'undefined'
+		? createWebStorage('local')
+		: createNoopStorage()
 
 import cartReducer from './cartSlice'
 

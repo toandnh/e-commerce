@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import useSWR from 'swr'
 
-import Modal from '@/components/modal'
+import Modal from '@/components/product/modal'
 import Product from '@/components/product/product'
 
 export default function ProductModal() {
