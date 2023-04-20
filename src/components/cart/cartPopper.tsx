@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 import { useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 
@@ -41,13 +43,17 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 						/>
 					))}
 				</div>
-				<div className='w-full p-4 md:p-6'>
+				<Popover.Button
+					as={Link}
+					href='/checkout'
+					className='w-full p-4 md:p-6'
+				>
 					<input
 						type='button'
 						className='bg-orange-400 w-full h-full font-bold rounded-md p-2 hover:cursor-pointer hover:bg-orange-500'
 						value='Check out'
 					/>
-				</div>
+				</Popover.Button>
 			</div>
 		)
 	}
@@ -69,11 +75,13 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 								/>
 							</Badge>
 						</Popover.Button>
-						<Popover.Panel className='absolute left-1/2 w-screen max-w-xs lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
-							<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
-								{cart}
-							</div>
-						</Popover.Panel>
+						{open && (
+							<Popover.Panel className='absolute left-1/2 w-screen max-w-xs lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
+								<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
+									{cart}
+								</div>
+							</Popover.Panel>
+						)}
 					</>
 				)}
 			</Popover>
