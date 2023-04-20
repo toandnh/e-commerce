@@ -2,7 +2,7 @@ import './globals.css'
 
 import Wrapper from './wrapper'
 
-import Topbar from './topbar'
+import Header from './header'
 import Footer from './footer'
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
 		<>
 			<div className='flex flex-col'>
 				<div className='flex flex-col p-4 sm:p-6 2xl:p-8'>
-					<Topbar />
+					<Header />
 					{children}
 				</div>
 				<Footer />

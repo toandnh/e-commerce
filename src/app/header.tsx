@@ -44,7 +44,7 @@ export default function Header() {
 	}
 
 	return (
-		<div className='w-full flex py-3 sm:py-4 2xl:py-5'>
+		<div className='bg-neutral-100 dark:bg-neutral-900 flex py-3 sm:py-4 2xl:py-5 sticky top-0 z-10'>
 			<Link href='/' className='flex basis-1/2 justify-start items-center'>
 				<h1
 					className={clsx(
