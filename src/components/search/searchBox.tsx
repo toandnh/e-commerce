@@ -23,7 +23,7 @@ export default function SearchBox() {
 	const { data: items } = useSWR(
 		shouldFetch ? `/api/items/${searchQuery}` : null,
 		fetcher,
-		{ refreshInterval: 500 }
+		{ refreshInterval: 300 }
 	)
 
 	const firstFiveItems = items && items.slice(0, 5)

@@ -33,7 +33,7 @@ export async function POST(
 	const foundItems = await prisma.item.findMany({
 		where: {
 			title: {
-				search: params.title,
+				contains: params.title,
 				mode: 'insensitive'
 			}
 		}
