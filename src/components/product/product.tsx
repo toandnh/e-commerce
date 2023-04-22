@@ -19,8 +19,6 @@ import { addToCart } from '@/store/cartSlice'
 
 import { cloudinaryLoader } from '../loader/cloudinaryLoader'
 
-import Alert from './alert'
-
 const amount: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 export default function Product({ item }: { item: Item }) {
@@ -62,7 +60,6 @@ export default function Product({ item }: { item: Item }) {
 
 	return (
 		<div className='bg-neutral-100 dark:bg-neutral-900 flex flex-col rounded-md'>
-			{added && <Alert title={item.title} />}
 			<div className='h-full aspect-[4/3] max-h-[80vh]'>
 				<div
 					className={clsx(
@@ -160,12 +157,22 @@ export default function Product({ item }: { item: Item }) {
 							</div>
 						</div>
 						<div>
-							<input
-								type='button'
-								onClick={handleSubmit}
-								className='w-full bg-orange-400 dark:bg-orange-600 h-10 rounded-md hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer'
-								value='Add to cart'
-							/>
+							{!added && (
+								<input
+									type='button'
+									onClick={handleSubmit}
+									className='w-full bg-orange-400 dark:bg-orange-600 h-10 rounded-md hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer'
+									value='Add to cart'
+								/>
+							)}
+							{added && (
+								<input
+									type='button'
+									onClick={handleSubmit}
+									className='w-full bg-blue-400/20 dark:bg-blue-600/20 h-10 rounded-md'
+									value='Added to cart'
+								/>
+							)}
 						</div>
 						<div className={clsx(!isFirstBreakpoint ? 'overflow-y-auto' : '')}>
 							{item.description}
