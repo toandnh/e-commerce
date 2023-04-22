@@ -1,4 +1,4 @@
-import ProductPage from '@/app/product/[productId]/productPage'
+import ProductPage from '@/app/product/[title]/productPage'
 
 export const metadata = {
 	title: 'Product | Another E Commerce Site',

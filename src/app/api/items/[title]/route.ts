@@ -21,3 +21,28 @@ export async function GET(
 
 	return NextResponse.json(foundItem)
 }
+
+export async function POST(
+	request: Request,
+	{ params }: { params: { title: string } }
+) {
+	if (!params.title) {
+		return NextResponse.json({ message: 'Missing title' })
+	}
+
+	const foundItems = await prisma.item.findMany({
+		where: {
+			title: {
+				search: params.title,
+				mode: 'insensitive'
+			}
+		}
+	})
+	if (!foundItems) {
+		return NextResponse.json({
+			message: `Product '${params.title}' not found`
+		})
+	}
+
+	return NextResponse.json(foundItems)
+}

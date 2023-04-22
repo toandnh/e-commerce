@@ -14,7 +14,7 @@ export default function Order({
 	valid: boolean
 }) {
 	return (
-		<div className='h-[55%] max-w-lg flex flex-col'>
+		<div className='h-2/3 max-w-lg flex flex-col'>
 			<CartItemList />
 			<div className='flex flex-col gap-4 p-4'>
 				<div className='flex justify-between'>

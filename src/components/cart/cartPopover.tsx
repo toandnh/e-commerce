@@ -16,7 +16,7 @@ import CartItemList from './cartItemList'
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export default function CartPopper({ theme }: { theme: string | undefined }) {
+export default function CartPopover({ theme }: { theme: string | undefined }) {
 	const cartLength = useAppSelector((state) => state.length)
 
 	let cart: React.ReactNode
@@ -46,32 +46,30 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 	}
 
 	return (
-		<>
-			<Popover className='relative'>
-				{({ open }) => (
-					<>
-						<Popover.Button>
-							<Badge
-								invisible={cartLength === 0}
-								badgeContent={cartLength}
-								color='warning'
-							>
-								<ShoppingBagOutlinedIcon
-									fontSize='large'
-									sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
-								/>
-							</Badge>
-						</Popover.Button>
-						{open && (
-							<Popover.Panel className='absolute left-1/2 w-screen max-w-xs sm:max-w-sm lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3'>
-								<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
-									{cart}
-								</div>
-							</Popover.Panel>
-						)}
-					</>
-				)}
-			</Popover>
-		</>
+		<Popover className='relative'>
+			{({ open }) => (
+				<>
+					<Popover.Button>
+						<Badge
+							invisible={cartLength === 0}
+							badgeContent={cartLength}
+							color='warning'
+						>
+							<ShoppingBagOutlinedIcon
+								fontSize='large'
+								sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
+							/>
+						</Badge>
+					</Popover.Button>
+					{open && (
+						<Popover.Panel className='absolute left-1/2 w-screen max-w-xs sm:max-w-sm lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3'>
+							<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
+								{cart}
+							</div>
+						</Popover.Panel>
+					)}
+				</>
+			)}
+		</Popover>
 	)
 }

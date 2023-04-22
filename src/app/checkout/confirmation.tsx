@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 
+import Link from 'next/link'
+
 import useSWR from 'swr'
 
+import Loading from '@/components/loading'
+
 import OrderItem from './orderItem'
-import Loading from './loading'
 
 export default function Confirmation({ orderId }: { orderId: string }) {
 	const [show, setShow] = useState(false)
@@ -46,10 +49,17 @@ export default function Confirmation({ orderId }: { orderId: string }) {
 			{show && (
 				<div className='flex flex-col gap-4'>
 					{orderItems.map((item: any) => (
-						<OrderItem item={item} />
+						<OrderItem key={item.title} item={item} />
 					))}
 				</div>
 			)}
+			<Link href='/' className='py-4'>
+				<input
+					type='button'
+					className=' bg-orange-400 dark:bg-orange-600 p-2 rounded-md hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer disabled:bg-orange-400/40 disabled:dark:bg-orange-600/40'
+					value='Continue Shopping'
+				/>
+			</Link>
 		</div>
 	)
 }

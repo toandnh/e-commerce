@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 
+import { useRouter } from 'next/navigation'
+
 import useSWRMutation from 'swr/mutation'
 
 import { RootState, AppDispatch } from '@/store'
@@ -17,19 +19,10 @@ import Confirmation from './confirmation'
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-async function createOrder(
-	url: string,
-	{ arg }: { arg: { items: ItemCart[]; total: number } }
-) {
-	return fetch(url, {
-		method: 'POST',
-		body: JSON.stringify(arg)
-	}).then((res) => res.json())
-}
-
 export default function Form() {
-	const items = useAppSelector((state) => state.cart)
+	const router = useRouter()
 
+	const items = useAppSelector((state) => state.cart)
 	const dispatch = useAppDispatch()
 
 	const [show, setShow] = useState(false)
@@ -41,7 +34,16 @@ export default function Form() {
 	const [country, setCountry] = useState('')
 	const [zip, setZip] = useState('')
 
-	const { data, trigger } = useSWRMutation('/api/orders', createOrder, {
+	const fetcher = async (
+		url: string,
+		{ arg }: { arg: { items: ItemCart[]; total: number } }
+	) =>
+		fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(arg)
+		}).then((res) => res.json())
+
+	const { data, trigger } = useSWRMutation('/api/orders', fetcher, {
 		revalidate: true
 	})
 
@@ -80,6 +82,7 @@ export default function Form() {
 	const isValid = true
 
 	useEffect(() => {
+		if (items.length === 0) router.push('/')
 		setShow(true)
 	}, [])
 

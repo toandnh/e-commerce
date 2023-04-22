@@ -1,4 +1,5 @@
-import SearchBox from './searchBox'
+import SearchBox from '@/components/search/searchBox'
+
 import Explore from './explore'
 
 export const revalidate = 3600 //revalidate this page every hour

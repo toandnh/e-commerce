@@ -15,7 +15,7 @@ import { useTheme } from 'next-themes'
 
 import { Orbitron } from 'next/font/google'
 
-import CartPopper from '@/components/cart/cartPopper'
+import CartPopover from '@/components/cart/cartPopover'
 
 const text = Orbitron({
 	subsets: ['latin'],
@@ -65,7 +65,7 @@ export default function Header() {
 					isCheckout ? 'hidden' : ''
 				)}
 			>
-				<CartPopper theme={theme} />
+				<CartPopover theme={theme} />
 				<button onClick={toggleTheme}>
 					{theme === 'dark' ? (
 						<DarkModeOutlinedIcon fontSize='large' sx={{ color: '#fff' }} />
