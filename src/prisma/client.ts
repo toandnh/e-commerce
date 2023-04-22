@@ -1,5 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
+export type Order = {
+	id: number
+	customerId: number | null
+	status: string
+	items: Item
+}
+
 declare global {
 	namespace NodeJS {
 		interface Global {}

@@ -20,7 +20,7 @@ export default function RootLayout({
 	const content = (
 		<>
 			<div className='flex flex-col'>
-				<div className='flex flex-col p-4 sm:p-6 2xl:p-8'>
+				<div className='min-h-screen flex flex-col p-4 sm:p-6 2xl:p-8'>
 					<Header />
 					{children}
 				</div>

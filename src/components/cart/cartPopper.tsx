@@ -10,39 +10,26 @@ import { Popover } from '@headlessui/react'
 import Badge from '@mui/material/Badge'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-
 import { RootState } from '@/store'
 
-import CartItem from './cartItem'
+import CartItemList from './cartItemList'
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function CartPopper({ theme }: { theme: string | undefined }) {
-	const cartItems = useAppSelector((state) => state.cart)
-
-	const isBreakpoint = useMediaQuery(768)
+	const cartLength = useAppSelector((state) => state.length)
 
 	let cart: React.ReactNode
 
-	if (cartItems.length === 0) {
+	if (cartLength === 0) {
 		cart = <p className='text-lg'>Your shopping cart is empty!</p>
 	} else {
 		cart = (
 			<div className='w-full h-full grid grid-rows-[1fr_8fr_1fr]'>
 				<p className='text-lg font-bold p-4 md:p-6'>
-					Items in cart: {cartItems.length}
+					Items in cart: {cartLength}
 				</p>
-				<div className='w-full relative grid gap-6 p-2 md:p-4 overflow-y-auto'>
-					{cartItems.map((item) => (
-						<CartItem
-							key={item.title}
-							item={item}
-							theme={theme}
-							isBreakpoint={isBreakpoint}
-						/>
-					))}
-				</div>
+				<CartItemList />
 				<Popover.Button
 					as={Link}
 					href='/checkout'
@@ -50,7 +37,7 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 				>
 					<input
 						type='button'
-						className='bg-orange-400 w-full h-full font-bold rounded-md p-2 hover:cursor-pointer hover:bg-orange-500'
+						className='bg-orange-400 dark:bg-orange-600  w-full h-full font-bold rounded-md p-2 hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer'
 						value='Check out'
 					/>
 				</Popover.Button>
@@ -65,8 +52,8 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 					<>
 						<Popover.Button>
 							<Badge
-								invisible={cartItems.length === 0}
-								badgeContent={cartItems.length}
+								invisible={cartLength === 0}
+								badgeContent={cartLength}
 								color='warning'
 							>
 								<ShoppingBagOutlinedIcon
@@ -76,7 +63,7 @@ export default function CartPopper({ theme }: { theme: string | undefined }) {
 							</Badge>
 						</Popover.Button>
 						{open && (
-							<Popover.Panel className='absolute left-1/2 w-screen max-w-xs lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3 z-10'>
+							<Popover.Panel className='absolute left-1/2 w-screen max-w-xs sm:max-w-sm lg:max-w-lg -translate-x-2/3 lg:-translate-x-3/4 transform px-4 sm:px-0 mt-3'>
 								<div className='h-[80vh] bg-white dark:bg-neutral-700 flex flex-col justify-center items-center rounded-md overflow-hidden'>
 									{cart}
 								</div>

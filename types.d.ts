@@ -17,3 +17,12 @@ type Tag = {
 	id: number
 	name: string
 }
+
+type Order = {
+	id: number
+	createdAt: string
+	status: string
+	items: ItemCart[]
+	total: number
+	customerId: number | null
+}

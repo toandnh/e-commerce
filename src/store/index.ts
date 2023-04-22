@@ -5,6 +5,8 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
 import thunk from 'redux-thunk'
 
+import cartReducer from './cartSlice'
+
 const createNoopStorage = () => {
 	return {
 		getItem(_key: any): Promise<null> {
@@ -23,8 +25,6 @@ const storage =
 	typeof window !== 'undefined'
 		? createWebStorage('local')
 		: createNoopStorage()
-
-import cartReducer from './cartSlice'
 
 const persistConfig = {
 	key: 'root',

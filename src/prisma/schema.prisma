@@ -15,11 +15,23 @@ model Customer {
 }
 
 model Order {
-  id         Int      @id @default(autoincrement())
-  customerId Int      @unique
-  customer   Customer @relation(fields: [customerId], references: [id])
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
   status     String
-  items      Item[]
+  items      OrderItem[]
+  total      Float
+  customerId Int?        @unique
+  customer   Customer?   @relation(fields: [customerId], references: [id])
+}
+
+model OrderItem {
+  id      Int    @id @default(autoincrement())
+  title   String
+  image   String
+  price   Float
+  amount  Int
+  Order   Order? @relation(fields: [orderId], references: [id])
+  orderId Int?
 }
 
 model Item {
@@ -30,8 +42,6 @@ model Item {
   description String?
   price       Float       @default(12.99)
   amount      Int
-  orderId     Int?
-  order       Order?      @relation(fields: [orderId], references: [id])
   tags        ItemsTags[]
 }
 

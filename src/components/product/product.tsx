@@ -49,26 +49,21 @@ export default function Product({ item }: { item: Item }) {
 	}, [added])
 
 	const image = (
-		<div
-			className={clsx(
-				'h-fit flex items-center',
-				isFirstBreakpoint ? 'justify-center' : ''
-			)}
-		>
+		<div className='h-full flex justify-center items-center'>
 			<Image
 				src={item.image}
 				alt={item.title}
-				height={400}
-				width={400}
+				height={600}
+				width={600}
 				loader={cloudinaryLoader}
 			/>
 		</div>
 	)
 
 	return (
-		<div className='bg-neutral-100 dark:bg-neutral-900 h-auto aspect-[4/3] flex flex-col rounded-md'>
+		<div className='bg-neutral-100 dark:bg-neutral-900 flex flex-col rounded-md'>
 			{added && <Alert title={item.title} />}
-			<div className='h-fit max-h-[80vh]'>
+			<div className='h-full aspect-[4/3] max-h-[80vh]'>
 				<div
 					className={clsx(
 						'h-full w-full grid gap-2 p-2 overflow-hidden',
@@ -110,8 +105,8 @@ export default function Product({ item }: { item: Item }) {
 								<Listbox value={selected} onChange={setSelected}>
 									<div
 										className={clsx(
-											isSecondBreakpoint ? 'basis-1/2' : 'basis-1/3',
-											'min-w-[90px] max-w-[90px]'
+											'relative min-w-[90px] max-w-[90px]',
+											isSecondBreakpoint ? 'basis-1/2' : 'basis-1/3'
 										)}
 									>
 										<Listbox.Button className='relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>

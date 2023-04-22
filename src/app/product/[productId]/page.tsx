@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function Product() {
 	return (
-		<main className='flex justify-center border border-neutral-200 dark:border-neutral-700'>
-			<div className='w-3/4'>
+		<main className='h-full flex justify-center items-center pt-4 sm:pt-6 2xl:pt-8'>
+			<div className='w-full p-4 sm:p-6 2xl:p-8 border border-neutral-200 dark:border-neutral-700'>
 				<ProductPage />
 			</div>
 		</main>
