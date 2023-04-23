@@ -2,8 +2,11 @@
 
 import { useCallback } from 'react'
 
+import Link from 'next/link'
+
 import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined'
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined'
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
@@ -32,8 +35,14 @@ export default function EmblaCarousel({
 	}, [emblaApi])
 
 	return (
-		<>
-			<div className='text-lg font-semibold pb-4'>{category}</div>
+		<div className='flex flex-col'>
+			<Link
+				href={`/product?tag=${category}`}
+				className='w-fit text-lg font-semibold pb-4'
+			>
+				{category}
+				<KeyboardDoubleArrowRightIcon />
+			</Link>
 			<div className='relative'>
 				<div className='flex flex-col gap-4 overflow-hidden' ref={emblaRef}>
 					<div className='flex'>
@@ -57,6 +66,6 @@ export default function EmblaCarousel({
 					<ArrowForwardIosOutlinedIcon sx={{ color: 'black' }} />
 				</button>
 			</div>
-		</>
+		</div>
 	)
 }

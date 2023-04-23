@@ -13,7 +13,7 @@ export async function POST(
 	const foundTags = await prisma.tag.findMany({
 		where: {
 			name: {
-				search: params.query
+				contains: params.query
 			}
 		}
 	})
