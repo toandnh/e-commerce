@@ -39,8 +39,8 @@ export default function SearchBox() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className='bg-neutral-100 dark:bg-neutral-900 flex gap-0 sm:gap-2 2xl:gap-4 pt-3 sm:pt-4 2xl:pt-5 pb-6 sm:pb-8 2xl:pb-10 sticky top-16 z-10'>
+		<form onSubmit={handleSubmit} className='sticky top-14 z-10'>
+			<div className='bg-neutral-100 dark:bg-neutral-900 flex gap-0 sm:gap-2 2xl:gap-4 pt-3 sm:pt-4 2xl:pt-5 pb-6 sm:pb-8 2xl:pb-10'>
 				<input
 					className='min-w-0 flex-grow rounded-md border-2 sm:border-3 2xl:border-4 border-gunmetal-gray p-2 focus:outline-none focus:border-amber-500'
 					type='text'

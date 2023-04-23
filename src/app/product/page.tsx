@@ -51,9 +51,9 @@ export default async function Product({
 	return (
 		<main className='h-full min-h-[80vh] w-full p-4 sm:p-6 2xl:p-8 border border-neutral-200 dark:border-neutral-700 rounded-md'>
 			<p className='font-semibold text-xl pb-4 sm:pb-6 2xl:pb-8 pl-4 sm:pl-6 2xl:pl-8'>
-				Result for <i>{searchParams.query ?? searchParams.tag}</i>
+				Result(s) for <i>{searchParams.query ?? searchParams.tag}</i>
 			</p>
-			<div className='flex flex-wrap gap-4 p-4 sm:p-6 2xl:p-8'>
+			<div className='grid grid-cols-fluid gap-4 p-4 sm:p-6 2xl:p-8'>
 				{items &&
 					items.map((item: Item) => (
 						<ProductPreview key={item.title} item={item} />
