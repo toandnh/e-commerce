@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined'
 
 import clsx from 'clsx'
 
@@ -16,6 +15,7 @@ import { useTheme } from 'next-themes'
 import { Orbitron } from 'next/font/google'
 
 import CartPopover from '@/components/cart/cartPopover'
+import AccountPopover from '@/components/account/accountPopover'
 
 const text = Orbitron({
 	subsets: ['latin'],
@@ -73,12 +73,7 @@ export default function Header() {
 						<LightModeOutlinedIcon fontSize='large' sx={{ color: '#000' }} />
 					)}
 				</button>
-				<Link href='/account'>
-					<AccountBoxOutlinedIcon
-						fontSize='large'
-						sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
-					/>
-				</Link>
+				<AccountPopover theme={theme} />
 			</div>
 		</div>
 	)

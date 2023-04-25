@@ -17,11 +17,16 @@ export default async function Feature() {
 		<>
 			<p className='font-semibold text-lg'>Featured</p>
 			<div className={`bg-[url(/kuroko.jpg)]`}>
-				<div className='flex flex-wrap gap-4'>
+				<div className='flex flex-wrap justify-center items-center gap-4'>
 					{items.map((item) => (
-						<div className='bg-neutral-300/50 dark:bg-neutral-800/50 grid grid-cols-fluid gap-4 p-10'>
-							<p className='font-semibold text-xl'>{item.title}</p>
-							<ProductPreview key={item.title} item={item} />
+						<div
+							className='bg-neutral-300/50 dark:bg-neutral-800/50 grid grid-cols-fluid gap-4 p-10'
+							key={item.title}
+						>
+							<div className='-mr-4'>
+								<p className='font-semibold text-xl'>{item.title}</p>
+								<ProductPreview item={item} />
+							</div>
 						</div>
 					))}
 				</div>

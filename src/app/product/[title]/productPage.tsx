@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import useSWR from 'swr'
 
 import Product from '@/components/product/product'
+import Loading from '@/components/loading'
 
 export default function ProductPage() {
 	const pathname = usePathname()
@@ -14,7 +15,7 @@ export default function ProductPage() {
 	const { isLoading, data } = useSWR(`/api/items/${productTitle}`, fetcher)
 
 	if (isLoading) {
-		return <>Loading...</>
+		return <Loading />
 	}
 
 	return !data.message ? <Product item={data} /> : <p>Product not found!</p>
