@@ -19,7 +19,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export default function Checkout() {
 	const router = useRouter()
 
-	const items = useAppSelector((state) => state.cart)
+	const items = useAppSelector((state) => state.cart.cart)
 
 	const [show, setShow] = useState(false)
 	const [fulfilled, setFulfilled] = useState(false)

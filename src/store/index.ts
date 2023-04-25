@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 import { configureStore } from '@reduxjs/toolkit'
 
 import { persistReducer, persistStore } from 'redux-persist'
@@ -6,6 +8,7 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 import thunk from 'redux-thunk'
 
 import cartReducer from './cartSlice'
+import ordersReducer from './ordersSlice'
 
 const createNoopStorage = () => {
 	return {
@@ -31,7 +34,12 @@ const persistConfig = {
 	storage
 }
 
-const persistedReducer = persistReducer(persistConfig, cartReducer)
+const rootReducer = combineReducers({
+	cart: cartReducer,
+	orders: ordersReducer
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
 	reducer: persistedReducer,

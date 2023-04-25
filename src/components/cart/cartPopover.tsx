@@ -17,7 +17,7 @@ import CartItemList from './cartItemList'
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function CartPopover({ theme }: { theme: string | undefined }) {
-	const cartLength = useAppSelector((state) => state.length)
+	const cartLength = useAppSelector((state) => state.cart.length)
 
 	let cart: React.ReactNode
 
