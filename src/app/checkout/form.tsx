@@ -1,73 +1,40 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import type { TypedUseSelectorHook } from 'react-redux'
-
-import { useRouter } from 'next/navigation'
-
-import useSWRMutation from 'swr/mutation'
-
-import { RootState, AppDispatch } from '@/store'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/store'
 
 import { emptyCart } from '@/store/cartSlice'
 
-import Confirmation from './confirmation'
 import OrderView from './orderView'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export default function Form() {
-	const router = useRouter()
+type Fee = {
+	nerdFee: number
+	taxes: number
+	shipping: number
+	subtotal: number
+	total: number
+}
 
-	const items = useAppSelector((state) => state.cart)
+export default function Form({
+	items,
+	fees,
+	trigger
+}: {
+	items: ItemCart[]
+	fees: Fee
+	trigger: Function
+}) {
 	const dispatch = useAppDispatch()
-
-	const [show, setShow] = useState(false)
-	const [fulfilled, setFulfilled] = useState(false)
 
 	const [email, setEmail] = useState('')
 	const [address, setAddress] = useState('')
 	const [city, setCity] = useState('')
 	const [country, setCountry] = useState('')
 	const [zip, setZip] = useState('')
-
-	const fetcher = async (
-		url: string,
-		{ arg }: { arg: { items: ItemCart[]; total: number } }
-	) =>
-		fetch(url, {
-			method: 'POST',
-			body: JSON.stringify(arg)
-		}).then((res) => res.json())
-
-	const { data, trigger } = useSWRMutation('/api/orders', fetcher, {
-		revalidate: true
-	})
-
-	const nerdFee = 7.99
-	const shipping = 0.0
-	let subtotal = 0
-
-	items.forEach((item) => {
-		subtotal += item.price * item.amount
-	})
-
-	subtotal = Math.round(subtotal * 100) / 100
-
-	const taxes =
-		Math.round((((subtotal + shipping + nerdFee) * 13) / 100) * 100) / 100
-	const total = Math.round((subtotal + taxes + shipping + nerdFee) * 100) / 100
-
-	const fees = {
-		nerdFee: nerdFee,
-		taxes: taxes,
-		shipping: shipping,
-		subtotal: subtotal,
-		total: total
-	}
 
 	{
 		/*
@@ -80,15 +47,6 @@ export default function Form() {
 		*/
 	}
 	const isValid = true
-
-	useEffect(() => {
-		if (items.length === 0) router.push('/')
-		setShow(true)
-	}, [])
-
-	useEffect(() => {
-		if (show) setFulfilled(true)
-	}, [data])
 
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value)
@@ -108,13 +66,11 @@ export default function Form() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		await trigger({ items, total })
+		await trigger({ items, total: fees.total })
 		dispatch(emptyCart())
 	}
 
-	const confirm = fulfilled && <Confirmation orderId={data.orderId} />
-
-	const form = !fulfilled && (
+	return (
 		<form
 			id='my-form'
 			className='w-full max-w-4xl flex gap-4 p-4 sm:p-6 2xl:p-8'
@@ -255,6 +211,4 @@ export default function Form() {
 			<OrderView fees={fees} valid={isValid} />
 		</form>
 	)
-
-	return form || confirm
 }
