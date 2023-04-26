@@ -1,10 +1,21 @@
 'use client'
 
-import useSWR from 'swr'
+import { useDispatch, useSelector } from 'react-redux'
+import type { TypedUseSelectorHook } from 'react-redux'
 
-import OrderItem from './orderItem'
+import useSWR from 'swr'
+import useSWRMutation from 'swr/mutation'
+
+import { AppDispatch, RootState } from '@/store'
+
+import { emptyOrders } from '@/store/ordersSlice'
+
+import Order from './order'
 
 import sasuke from '../../../public/sasuke.gif'
+
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 type User = {
 	name?: string | null | undefined
@@ -13,11 +24,37 @@ type User = {
 }
 
 export default function OrderList({ user }: { user: User }) {
+	const tempOrders = useAppSelector((state) => state.orders.orders)
+
+	const dispatch = useAppDispatch()
+
+	if (tempOrders.length !== 0) {
+		const fetcher = async (
+			url: string,
+			{ arg }: { arg: { email: string; orderId: number } }
+		) =>
+			fetch(url, {
+				method: 'PATCH',
+				body: JSON.stringify(arg)
+			}).then((res) => res.json())
+		const { trigger } = useSWRMutation('/api/orders', fetcher, {
+			revalidate: true
+		})
+
+		tempOrders.forEach((orderId) => {
+			trigger({ email: user.email!, orderId })
+		})
+
+		dispatch(emptyOrders())
+	}
+
 	const fetcher = (url: string) => fetch(url).then((res) => res.json())
-	const { data: orders } = useSWR(
+	const { isLoading, data: orders } = useSWR(
 		`/api/orders/user?email=${user.email}`,
 		fetcher
 	)
+
+	if (isLoading) return <></>
 
 	const hasOrder = orders && orders.length !== 0
 
@@ -25,8 +62,8 @@ export default function OrderList({ user }: { user: User }) {
 		<>
 			{hasOrder && (
 				<div className='flex flex-col justify-center items-center gap-4'>
-					{orders.map((item: ItemCart) => (
-						<OrderItem key={item.title} item={item} />
+					{orders.map((order: Order) => (
+						<Order key={order.id} orderId={order.id} isLoggedIn={true} />
 					))}
 				</div>
 			)}

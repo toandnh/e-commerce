@@ -59,22 +59,19 @@ export default function Header() {
 					AECS
 				</h1>
 			</Link>
-			<div
-				className={clsx(
-					'flex gap-2 sm:gap-3 2xl:gap-4 justify-end items-center',
-					isCheckout ? 'hidden' : ''
-				)}
-			>
-				<CartPopover theme={theme} />
-				<button onClick={toggleTheme}>
-					{theme === 'dark' ? (
-						<DarkModeOutlinedIcon fontSize='large' sx={{ color: '#fff' }} />
-					) : (
-						<LightModeOutlinedIcon fontSize='large' sx={{ color: '#000' }} />
-					)}
-				</button>
-				<AccountPopover theme={theme} />
-			</div>
+			{!isCheckout && (
+				<div className='flex gap-2 sm:gap-3 2xl:gap-4 justify-end items-center'>
+					<CartPopover theme={theme} />
+					<button onClick={toggleTheme}>
+						{theme === 'dark' ? (
+							<DarkModeOutlinedIcon fontSize='large' sx={{ color: '#fff' }} />
+						) : (
+							<LightModeOutlinedIcon fontSize='large' sx={{ color: '#000' }} />
+						)}
+					</button>
+					<AccountPopover theme={theme} />
+				</div>
+			)}
 		</div>
 	)
 }

@@ -2,18 +2,39 @@
 
 import { useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import Link from 'next/link'
+
+import { usePathname } from 'next/navigation'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import useSWR from 'swr'
 
+import { AppDispatch } from '@/store'
+
+import { addToOrders } from '@/store/ordersSlice'
+
 import Loading from '@/components/loading'
 
 import OrderItem from './orderItem'
 
-export default function Order({ orderId }: { orderId: string }) {
+export const useAppDispatch: () => AppDispatch = useDispatch
+
+export default function Order({
+	orderId,
+	isLoggedIn
+}: {
+	orderId: number
+	isLoggedIn: boolean
+}) {
+	const pathname = usePathname()
+	const isAccount = pathname === '/account'
+
 	const [show, setShow] = useState(false)
+
+	const dispatch = useDispatch()
 
 	const fetcher = (url: string) => fetch(url).then((res) => res.json())
 	const { isLoading: isOrderLoading, data: order } = useSWR(
@@ -26,6 +47,8 @@ export default function Order({ orderId }: { orderId: string }) {
 	)
 
 	if (isItemLoading || isOrderLoading) return <Loading />
+
+	if (!isLoggedIn) dispatch(addToOrders(orderId))
 
 	const date = order.createdAt.split('T')[0]
 	const status = order.status.charAt(0).toUpperCase() + order.status.slice(1)
@@ -52,13 +75,15 @@ export default function Order({ orderId }: { orderId: string }) {
 					))}
 				</div>
 			)}
-			<Link href='/' className='py-4'>
-				<input
-					type='button'
-					className=' bg-orange-400 dark:bg-orange-600 p-2 rounded-md hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer disabled:bg-orange-400/40 disabled:dark:bg-orange-600/40'
-					value='Continue Shopping'
-				/>
-			</Link>
+			{!isAccount && (
+				<Link href='/' className='py-4'>
+					<input
+						type='button'
+						className=' bg-orange-400 dark:bg-orange-600 p-2 rounded-md hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer disabled:bg-orange-400/40 disabled:dark:bg-orange-600/40'
+						value='Continue Shopping'
+					/>
+				</Link>
+			)}
 		</div>
 	)
 }

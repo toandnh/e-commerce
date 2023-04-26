@@ -7,6 +7,7 @@ import type { TypedUseSelectorHook } from 'react-redux'
 
 import { useRouter } from 'next/navigation'
 
+import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 
 import { RootState } from '@/store'
@@ -24,6 +25,10 @@ export default function Checkout() {
 	const [show, setShow] = useState(false)
 	const [fulfilled, setFulfilled] = useState(false)
 
+	const { data: session } = useSWR('/api/account', (url: string) =>
+		fetch(url).then((res) => res.json())
+	)
+
 	const fetcher = async (
 		url: string,
 		{ arg }: { arg: { items: ItemCart[]; total: number } }
@@ -32,10 +37,11 @@ export default function Checkout() {
 			method: 'POST',
 			body: JSON.stringify(arg)
 		}).then((res) => res.json())
-
 	const { data, trigger } = useSWRMutation('/api/orders', fetcher, {
 		revalidate: true
 	})
+
+	const isLoggedIn: boolean = session?.user
 
 	const nerdFee = 7.99
 	const shipping = 0.0
@@ -69,7 +75,7 @@ export default function Checkout() {
 	}, [data])
 
 	return fulfilled ? (
-		<Confirmation orderId={data.orderId} />
+		<Confirmation orderId={data.orderId} isLoggedIn={isLoggedIn} />
 	) : (
 		<Form items={items} fees={fees} trigger={trigger} />
 	)

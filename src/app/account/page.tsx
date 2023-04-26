@@ -22,8 +22,16 @@ export default async function Account() {
 			</div>
 		)
 	} else {
-		content = <OrderList user={session.user} />
+		content = (
+			<div className='min-h-[80vh] w-full'>
+				<OrderList user={session.user} />
+			</div>
+		)
 	}
 
-	return content
+	return (
+		<main className='w-full flex justify-center items-center p-4 sm:p-6 2xl:p-8 border border-neutral-200 dark:border-neutral-700 rounded-md'>
+			{content}
+		</main>
+	)
 }
