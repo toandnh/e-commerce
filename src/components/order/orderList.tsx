@@ -18,9 +18,9 @@ export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 type User = {
-	name?: string | null | undefined
-	email?: string | null | undefined
-	image?: string | null | undefined
+	name?: string | null
+	email?: string | null
+	image?: string | null
 }
 
 export default function OrderList({ user }: { user: User }) {
@@ -54,14 +54,14 @@ export default function OrderList({ user }: { user: User }) {
 		fetcher
 	)
 
-	if (isLoading) return <></>
+	if (isLoading) return <p className='text-xl'>Loading orders...</p>
 
 	const hasOrder = orders && orders.length !== 0
 
 	return (
 		<>
 			{hasOrder && (
-				<div className='flex flex-col justify-center items-center gap-4'>
+				<div className='flex flex-col justify-center items-center gap-16'>
 					{orders.map((order: Order) => (
 						<Order key={order.id} orderId={order.id} isLoggedIn={true} />
 					))}

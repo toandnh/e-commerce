@@ -3,9 +3,14 @@
 import { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
+
+import clsx from 'clsx'
+
 import { AppDispatch } from '@/store'
 
 import { emptyCart } from '@/store/cartSlice'
+
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 import OrderView from './orderView'
 
@@ -28,6 +33,8 @@ export default function Form({
 	fees: Fee
 	trigger: Function
 }) {
+	const isBreakPoint = useMediaQuery(576)
+
 	const dispatch = useAppDispatch()
 
 	const [email, setEmail] = useState('')
@@ -73,10 +80,13 @@ export default function Form({
 	return (
 		<form
 			id='my-form'
-			className='w-full max-w-4xl flex gap-4 p-4 sm:p-6 2xl:p-8'
+			className={clsx(
+				'min-h-[80vh] w-full max-w-4xl flex gap-4 p-4 sm:p-6 2xl:p-8',
+				isBreakPoint ? 'flex-col' : ''
+			)}
 			onSubmit={handleSubmit}
 		>
-			<div className=''>
+			<div>
 				<div className='flex flex-col border-b border-neutral-700'>
 					<p className='block uppercase tracking-wide text-sm font-bold mb-2 mr-1 pb-8'>
 						Contact Information

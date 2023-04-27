@@ -8,5 +8,9 @@ export default function CheckoutLayout({
 }: {
 	children: React.ReactNode
 }) {
-	return <section className='mt-4 sm:mt-6 2xl:mt-8'>{children}</section>
+	return (
+		<section className='mt-4 sm:mt-6 2xl:mt-8 border border-neutral-200 dark:border-neutral-700 rounded-md'>
+			{children}
+		</section>
+	)
 }

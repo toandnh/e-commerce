@@ -6,11 +6,11 @@ export default function Confirmation({
 	orderId,
 	isLoggedIn
 }: {
-	orderId: string
+	orderId: number
 	isLoggedIn: boolean
 }) {
 	return (
-		<div className='w-3/4 flex flex-col gap-4'>
+		<div className='min-h-[80vh] w-3/4 flex flex-col gap-4'>
 			<img
 				src={yetAnotherGreatFind.src}
 				alt='yet-another-great-find'

@@ -12,11 +12,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import useSWR from 'swr'
 
+import { useTheme } from 'next-themes'
+
 import { AppDispatch } from '@/store'
 
 import { addToOrders } from '@/store/ordersSlice'
-
-import Loading from '@/components/loading'
 
 import OrderItem from './orderItem'
 
@@ -29,6 +29,8 @@ export default function Order({
 	orderId: number
 	isLoggedIn: boolean
 }) {
+	const { theme } = useTheme()
+
 	const pathname = usePathname()
 	const isAccount = pathname === '/account'
 
@@ -46,7 +48,7 @@ export default function Order({
 		fetcher
 	)
 
-	if (isItemLoading || isOrderLoading) return <Loading />
+	if (isItemLoading || isOrderLoading) return <></>
 
 	if (!isLoggedIn) dispatch(addToOrders(orderId))
 
@@ -59,14 +61,19 @@ export default function Order({
 	}
 
 	return (
-		<div className='w-full h-fit bg-neutral-200 dark:bg-neutral-600 flex flex-col justify-start gap-4 p-4 rounded-md'>
-			<h2>Order Reference: {order.id}</h2>
-			<h4>Date: {date}</h4>
-			<h4>Status: {status}</h4>
-			<h4>Total: {total}</h4>
+		<div className='w-full h-fit bg-neutral-200 dark:bg-neutral-600 flex flex-col justify-start gap-6 p-4 rounded-md'>
+			<p className='font-semibold text-xl'>Order Reference: {order.id}</p>
+			<p>Date: {date}</p>
+			<div className='flex items-center gap-2'>
+				Status: <p className='bg-orange-500 py-1 px-2 rounded-md'>{status}</p>
+			</div>
+			<p>Total: {total}</p>
 			<button className='flex items-center' onClick={toggleShow}>
 				{show ? 'Hide Details' : 'Show Details'}
-				<KeyboardArrowDownIcon fontSize='small' sx={{ color: '#fff' }} />
+				<KeyboardArrowDownIcon
+					fontSize='small'
+					sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
+				/>
 			</button>
 			{show && (
 				<div className='flex flex-col gap-4'>

@@ -22,12 +22,13 @@ export default function AccountPopover({
 	if (session?.user) {
 		content = (
 			<div className='w-full flex flex-col items-center p-4'>
-				<Link
+				<Popover.Button
+					as={Link}
 					href='/account'
 					className='w-full h-full flex justify-center p-4 rounded-md hover:cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800'
 				>
 					Orders
-				</Link>
+				</Popover.Button>
 				<input
 					type='button'
 					onClick={() => signOut()}

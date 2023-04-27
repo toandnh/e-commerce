@@ -58,6 +58,8 @@ export async function PATCH(request: Request) {
 
 	const user = await prisma.user.findUnique({ where: { email } })
 
+	console.log(user)
+
 	const updatedOrder = await prisma.order.update({
 		where: {
 			id: orderId

@@ -13,7 +13,7 @@ model Order {
   status    String
   items     OrderItem[]
   total     Float
-  userId    String?     @unique
+  userId    String?
   user      User?       @relation(fields: [userId], references: [id])
 }
 

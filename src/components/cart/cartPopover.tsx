@@ -37,7 +37,7 @@ export default function CartPopover({ theme }: { theme: string | undefined }) {
 				>
 					<input
 						type='button'
-						className='bg-orange-400 dark:bg-orange-600  w-full h-full font-bold rounded-md p-2 hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer'
+						className='bg-orange-400 dark:bg-orange-600 w-full h-full font-bold rounded-md p-2 hover:bg-orange-500 dark:hover:bg-orange-700 hover:cursor-pointer'
 						value='Check out'
 					/>
 				</Popover.Button>

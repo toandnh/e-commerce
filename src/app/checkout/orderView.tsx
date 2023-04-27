@@ -14,7 +14,7 @@ export default function OrderView({
 	valid: boolean
 }) {
 	return (
-		<div className='h-2/3 min-h-[640px] max-w-lg flex flex-col'>
+		<div className='relative h-[30vh] min-h-[640px] max-w-lg flex flex-col'>
 			<CartItemList />
 			<div className='flex flex-col gap-4 p-4'>
 				<div className='flex justify-between'>
