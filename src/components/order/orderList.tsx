@@ -68,12 +68,14 @@ export default function OrderList({ user }: { user: User }) {
 				</div>
 			)}
 			{!hasOrder && (
-				<div className='absolute h-full w-full flex justify-center items-center'>
-					<img
-						src={sasuke.src}
-						alt='sasuke-nothing-interesting-here'
-						className='h-2/3 aspect-[3/2]'
-					/>
+				<div className='relative h-full min-h-[80vh] w-full'>
+					<div className='absolute h-full w-full flex justify-center items-center'>
+						<img
+							src={sasuke.src}
+							alt='sasuke-nothing-interesting-here'
+							className='h-2/3 aspect-[3/2]'
+						/>
+					</div>
 				</div>
 			)}
 		</>
