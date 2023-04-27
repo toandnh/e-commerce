@@ -51,8 +51,8 @@ export default function Product({ item }: { item: Item }) {
 			<Image
 				src={item.image}
 				alt={item.title}
-				height={400}
-				width={400}
+				height={500}
+				width={500}
 				loader={cloudinaryLoader}
 			/>
 		</div>
