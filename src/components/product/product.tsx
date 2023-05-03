@@ -51,9 +51,12 @@ export default function Product({ item }: { item: Item }) {
 			<Image
 				src={item.image}
 				alt={item.title}
-				height={500}
-				width={500}
+				width='0'
+				height='0'
+				sizes='100vw'
+				className='w-full h-auto'
 				loader={cloudinaryLoader}
+				priority
 			/>
 		</div>
 	)

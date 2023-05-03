@@ -12,11 +12,10 @@ export default function ProductPreview({ item }: { item: Item }) {
 				<Image
 					src={item.image}
 					alt={item.title}
-					height={200}
-					width={200}
-					sizes='(min-width: 60em) 24vw,
-                  (min-width: 28em) 45vw,
-                  100vw'
+					height='0'
+					width='0'
+					sizes='100vw'
+					className='h-auto w-52'
 					loader={cloudinaryLoader}
 				/>
 			</Link>

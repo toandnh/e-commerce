@@ -9,7 +9,7 @@ export default function SearchPopover({ items }: { items: Item[] }) {
 				static
 				className='absolute left-1/2 w-full -translate-x-1/2 -mt-4'
 			>
-				<div className='bg-white dark:bg-neutral-700 flex flex-col justify-center items-center gap-4 p-2 rounded-md overflow-hidden'>
+				<div className='bg-white dark:bg-neutral-700 flex flex-col justify-center items-center gap-2 p-2 rounded-md overflow-hidden'>
 					{items &&
 						items.map((item: Item) => {
 							return <SearchResult key={item.title} item={item} />

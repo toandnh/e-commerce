@@ -61,7 +61,7 @@ export default function OrderList({ user }: { user: User }) {
 	return (
 		<>
 			{hasOrder && (
-				<div className='flex flex-col justify-center items-center gap-16'>
+				<div className='flex flex-col justify-center items-center gap-8'>
 					{orders.map((order: Order) => (
 						<Order key={order.id} orderId={order.id} isLoggedIn={true} />
 					))}

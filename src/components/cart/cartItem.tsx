@@ -49,8 +49,10 @@ export default function CartItem({ item }: { item: ItemCart }) {
 					<Image
 						src={item.image}
 						alt={item.title}
-						height={400}
-						width={400}
+						width='0'
+						height='0'
+						sizes='100vw'
+						className='w-full h-auto'
 						loader={cloudinaryLoader}
 					/>
 				</div>
