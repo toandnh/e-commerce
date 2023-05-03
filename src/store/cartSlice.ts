@@ -3,12 +3,10 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 type Cart = {
 	cart: ItemCart[]
-	length: number
 }
 
 const initialState: Cart = {
-	cart: [],
-	length: 0
+	cart: []
 }
 
 const cartSlice = createSlice({
@@ -41,12 +39,10 @@ const cartSlice = createSlice({
 				cartSlice.caseReducers.updateAmount(state, updateAction)
 			} else {
 				state.cart = [...state.cart, action.payload]
-				state.length++
 			}
 		},
 		removeItemFromCart: (state, action: PayloadAction<string>) => {
 			state.cart = state.cart.filter((item) => item.title !== action.payload)
-			state.length--
 		},
 		updateAmount: (
 			state,
@@ -82,7 +78,6 @@ const cartSlice = createSlice({
 		},
 		emptyCart: (state) => {
 			state.cart = []
-			state.length = 0
 		}
 	}
 })
