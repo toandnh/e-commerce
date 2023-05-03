@@ -36,12 +36,14 @@ export default function CartItem({ item }: { item: ItemCart }) {
 
 	return (
 		<div className='border-neutral-200 dark:border-neutral-600 flex flex-col items-center p-2 border-b'>
-			<button className='w-full flex justify-end' onClick={handleClearItem}>
-				<DeleteForeverIcon
-					fontSize='medium'
-					sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
-				/>
-			</button>
+			<div className='w-full flex justify-end'>
+				<button onClick={handleClearItem}>
+					<DeleteForeverIcon
+						fontSize='medium'
+						sx={{ color: theme === 'dark' ? '#fff' : '#000' }}
+					/>
+				</button>
+			</div>
 			<div className='w-full flex items-center'>
 				<div className='flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12'>
 					<Image
