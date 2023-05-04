@@ -48,7 +48,7 @@ export default function Header() {
 	}
 
 	return (
-		<div className='bg-neutral-100 dark:bg-neutral-900 flex justify-between py-4 sm:py-6 2xl:py-10 sticky top-0 z-20'>
+		<div className='bg-neutral-100 dark:bg-neutral-900 flex justify-between py-3 sticky top-0 z-20'>
 			<Link href='/' className='flex justify-start items-center'>
 				<h1
 					className={clsx(
