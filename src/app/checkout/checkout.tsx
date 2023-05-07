@@ -68,10 +68,12 @@ export default function Checkout() {
 	useEffect(() => {
 		if (items.length === 0) router.push('/')
 		setShow(true)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		if (show) setFulfilled(true)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data])
 
 	return fulfilled ? (
