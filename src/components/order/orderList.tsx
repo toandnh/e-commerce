@@ -28,19 +28,19 @@ export default function OrderList({ user }: { user: User }) {
 
 	const dispatch = useAppDispatch()
 
-	if (tempOrders.length !== 0) {
-		const fetcher = async (
-			url: string,
-			{ arg }: { arg: { email: string; orderId: number } }
-		) =>
-			fetch(url, {
-				method: 'PATCH',
-				body: JSON.stringify(arg)
-			}).then((res) => res.json())
-		const { trigger } = useSWRMutation('/api/orders', fetcher, {
-			revalidate: true
-		})
+	const fetcher = async (
+		url: string,
+		{ arg }: { arg: { email: string; orderId: number } }
+	) =>
+		fetch(url, {
+			method: 'PATCH',
+			body: JSON.stringify(arg)
+		}).then((res) => res.json())
+	const { trigger } = useSWRMutation('/api/orders', fetcher, {
+		revalidate: true
+	})
 
+	if (tempOrders.length !== 0) {
 		tempOrders.forEach((orderId) => {
 			trigger({ email: user.email!, orderId })
 		})
@@ -48,10 +48,9 @@ export default function OrderList({ user }: { user: User }) {
 		dispatch(emptyOrders())
 	}
 
-	const fetcher = (url: string) => fetch(url).then((res) => res.json())
 	const { isLoading, data: orders } = useSWR(
 		`/api/orders/user?email=${user.email}`,
-		fetcher
+		(url: string) => fetch(url).then((res) => res.json())
 	)
 
 	if (isLoading) return <p className='text-xl'>Loading orders...</p>
